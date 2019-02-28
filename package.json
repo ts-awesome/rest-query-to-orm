@@ -1,0 +1,22 @@
+{
+  "name": "@viatsyshyn/ts-rest-query-to-orm",
+  "version": "0.1.0",
+  "description": "TypeScript REST Query To Orm Middleware",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc && cp src/*.d.ts dist/src/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@viatsyshyn/ts-rest-query": "~0.1.1",
+    "@viatsyshyn/ts-orm": "~0.1.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1",
+    "typescript": "^3.3.3"
+  },
+  "author": "Volodymyr Iatsyshyn <viatsyshyn@gmail.com>",
+  "license": "ISC"
+}
