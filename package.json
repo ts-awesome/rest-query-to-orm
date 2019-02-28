@@ -1,6 +1,6 @@
 {
   "name": "@viatsyshyn/ts-rest-query-to-orm",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "TypeScript REST Query To Orm Middleware",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
