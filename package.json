@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@viatsyshyn/ts-rest-query": "~0.1.1",
-    "@viatsyshyn/ts-orm": "~0.1.1",
+    "@viatsyshyn/ts-rest-query": "~0.1.2",
+    "@viatsyshyn/ts-orm": "~0.1.3",
     "express": "^4.16.4"
   },
   "devDependencies": {
