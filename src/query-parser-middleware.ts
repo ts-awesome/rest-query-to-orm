@@ -20,7 +20,7 @@ export function QueryParserMiddlewareFor<T extends TableMetaProvider<InstanceTyp
   }
 
   Object.defineProperty(middleware, 'name', { value: `${Model.name}QueryParserMiddleware` });
-  middleware = DecoratorUtils.D([injectable], middleware);
+  middleware = DecoratorUtils.D([injectable()], middleware);
 
   return middleware;
 }
