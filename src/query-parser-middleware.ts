@@ -17,14 +17,6 @@ export function QueryParserMiddlewareFor<T extends TableMetaProvider<InstanceTyp
       req.params.offset = query.offset;
       req.params.orderBy = compileOrderFor(Model, query.orderBy || {});
       req.params.countOnly = countOnly;
-
-      console.log('Params');
-      console.log('query', req.params.query);
-      console.log('orderBy', req.params.orderBy);
-      console.log('limit', req.params.limit);
-      console.log('offset', req.params.offset);
-      console.log('countOnly', req.params.countOnly);
-      console.log('============');
     }
   }
 
