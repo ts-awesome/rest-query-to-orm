@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "dependencies": {
     "@viatsyshyn/ts-orm": "~0.1.6",
@@ -19,7 +19,11 @@
   "devDependencies": {
     "@types/express": "^4.16.1",
     "@types/inversify": "^2.0.33",
-    "typescript": "^3.3.3"
+    "@typescript-eslint/eslint-plugin": "^2.16.0",
+    "@typescript-eslint/parser": "^2.16.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "typescript": "^3.7.5"
   },
   "author": "Volodymyr Iatsyshyn <viatsyshyn@gmail.com>",
   "license": "ISC"
