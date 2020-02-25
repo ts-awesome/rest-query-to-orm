@@ -26,7 +26,7 @@ export function compileWhereFor<T extends TableMetaProvider<InstanceType<T>>>(Mo
   return (props) => filters[query.op](...Object.keys(query.filter).map(prop => {
     const conditions = query.filter[prop];
     return Object.keys(conditions)
-      .reduce((a: IOperandable<T[any]>, op: Operation) => a[operationsMap[op]](conditions[op]), props[prop]);
+      .reduce((a: IOperandable<T[any]>, op: Operation | any) => a[operationsMap[op]](conditions[op]), props[prop]);
   }) as any);
 }
 
