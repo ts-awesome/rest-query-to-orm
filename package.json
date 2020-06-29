@@ -12,6 +12,7 @@
     "@viatsyshyn/ts-orm": "~0.2.6",
     "@viatsyshyn/ts-rest": "~0.2.3",
     "@viatsyshyn/ts-rest-query": "~0.1.4",
+    "@viatsyshyn/ts-simple-query": "^0.1.0",
     "express": "^4.16.4",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
