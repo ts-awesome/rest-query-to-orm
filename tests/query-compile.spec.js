@@ -1,5 +1,5 @@
 const {compileWhereFor} = require('../dist/compiler');
-const {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP, IN_OP, LIKE_OP} = require('@viatsyshyn/ts-simple-query');
+const {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP, IN_OP, LIKE_OP} = require('@ts-awesome/simple-query');
 
 describe('query compiler', () => {
 

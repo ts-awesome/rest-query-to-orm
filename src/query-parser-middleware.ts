@@ -1,8 +1,8 @@
 import { compileOrderFor, compileWhereFor } from './compiler';
-import { TableMetaProvider } from '@viatsyshyn/ts-orm';
-import { parser } from '@viatsyshyn/ts-rest-query';
+import { TableMetaProvider } from '@ts-awesome/orm';
+import { parser } from '@ts-awesome/rest-query';
 
-import { IMiddleware } from '@viatsyshyn/ts-rest';
+import { IMiddleware } from '@ts-awesome/rest';
 import { D } from './decorator-utils';
 import { injectable } from 'inversify'
 

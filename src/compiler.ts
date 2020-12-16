@@ -8,7 +8,7 @@ import {
   desc,
   not,
   IOperandable
-} from '@viatsyshyn/ts-orm';
+} from '@ts-awesome/orm';
 
 import {
   ISimpleQuery,
@@ -23,13 +23,13 @@ import {
   REGEX_OP,
   REF_OP,
   NOT_OP
-} from '@viatsyshyn/ts-simple-query';
+} from '@ts-awesome/simple-query';
 
 import {
   IOrderBy,
   ASC,
   DESC,
-} from '@viatsyshyn/ts-rest-query';
+} from '@ts-awesome/rest-query';
 
 export { ISimpleQuery, IOrderBy, AND_OP, OR_OP, ASC, DESC, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP};
 

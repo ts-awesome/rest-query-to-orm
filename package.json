@@ -9,10 +9,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@viatsyshyn/ts-orm": "~0.2.0",
-    "@viatsyshyn/ts-rest": "~0.2.0",
-    "@viatsyshyn/ts-rest-query": "~0.2.0",
-    "@viatsyshyn/ts-simple-query": "^0.1.0",
+    "@ts-awesome/orm": "^1.0.0",
+    "@ts-awesome/rest": "^1.0.0",
+    "@ts-awesome/rest-query": "^1.0.0",
+    "@ts-awesome/simple-query": "^1.0.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13"
   },
