@@ -1,5 +1,5 @@
 {
-  "name": "@viatsyshyn/ts-rest-query-to-orm",
+  "name": "@ts-awesome/rest-query-to-orm",
   "version": "0.0.0",
   "description": "TypeScript REST Query To Orm Middleware",
   "main": "dist/index.js",
@@ -26,5 +26,5 @@
     "typescript": "^3.7.5"
   },
   "author": "Volodymyr Iatsyshyn <viatsyshyn@gmail.com>",
-  "license": "ISC"
+  "license": "MIT"
 }
