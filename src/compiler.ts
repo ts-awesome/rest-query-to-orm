@@ -24,7 +24,8 @@ import {
   LTE_OP,
   REGEX_OP,
   REF_OP,
-  NOT_OP
+  NOT_OP,
+  CONTAINS_OP,
 } from '@ts-awesome/simple-query';
 
 import {
@@ -53,7 +54,8 @@ const operationsMap = {
   [LTE_OP]: 'lte',
   [REGEX_OP]: 'like',
   [LIKE_OP]: 'like',
-  [IN_OP]: 'in'
+  [IN_OP]: 'in',
+  [CONTAINS_OP]: 'has',
 };
 
 export interface ReferenceResolver<T> {
@@ -106,6 +108,7 @@ function compile<T>(resolver: ReferenceResolver<T>, condition, op: string | null
         .map(([field, value]) => resolver(field)[operationsMap[op]](compile(resolver, value, null)))[0];
 
     case IN_OP:
+    case CONTAINS_OP:
       return Object.entries(condition)
         .map(([field, value]) => resolver(field)[operationsMap[op]](value))[0];
 

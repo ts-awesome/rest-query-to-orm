@@ -1,5 +1,6 @@
 const {compileWhereFor} = require('../dist/compiler');
-const {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP, IN_OP, LIKE_OP} = require('@ts-awesome/simple-query');
+const {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP, IN_OP, LIKE_OP, CONTAINS_OP
+} = require('@ts-awesome/simple-query');
 
 describe('query compiler', () => {
 
@@ -16,6 +17,7 @@ describe('query compiler', () => {
       lte(x) { return `\`${field}\`<=${x}` },
       like(x) { return `\`${field}\`~${JSON.stringify(x)}`},
       in(x) { return `\`${field}\`IN${JSON.stringify(x)}`},
+      has(x) { return `\`${field}\`HAS${JSON.stringify(x)}`},
     }
 
     const result = new String('`' + field + '`');
@@ -252,6 +254,20 @@ describe('query compiler', () => {
     const result = fn(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`IN[1,2]");
+  });
+
+  it('explicit contains', async () => {
+    const input = {
+      [CONTAINS_OP]: {
+        'a': 1,
+      }
+    };
+
+    const fn = compileWhereFor(Model, input);
+
+    const result = fn(operandable('a', 'b'));
+
+    expect(result).toStrictEqual( "`a`HAS1");
   });
 
   it('expression', async () => {
