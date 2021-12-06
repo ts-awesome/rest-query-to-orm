@@ -71,7 +71,7 @@ export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorat
 
   let fieldMeta;
   let operators;
-  if (args.length > 1 && typeof args[0] === 'function' && typeof args[1] === 'string') {
+  if (args.length > 1 && typeof args[0]?.constructor === 'function' && typeof args[1] === 'string') {
     return validator(...(args as [unknown, string]));
   }
 

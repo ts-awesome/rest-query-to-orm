@@ -154,7 +154,7 @@ export function compileWhereFor<T extends TableMetaProvider<InstanceType<T>>>(Mo
           const fieldInfo = fields.get(field);
           switch (fieldInfo?.kind) {
             case 'plain':
-              return props[fieldInfo.name][op](value);
+              return (typeof op === 'symbol') ? props[fieldInfo.name].toString() : props[fieldInfo.name][op](value);
             case 'relation':
               return props[fieldInfo.field].in(
                 new Operandable('SUBQUERY', [(Select(fieldInfo.relation)

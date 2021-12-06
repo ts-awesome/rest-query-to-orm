@@ -1,11 +1,20 @@
 import {compileWhereFor} from '../src/compiler';
 import {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, IN_OP, LIKE_OP, CONTAINS_OP } from '@ts-awesome/simple-query';
+import {filterable} from "../src/decorators";
+import {dbField, dbTable} from "@ts-awesome/orm";
 
 describe('query compiler', () => {
 
+  @dbTable('test')
+  class DbModel {
+    @dbField public a!: number;
+    @dbField public b!: number;
+  }
+
+  @filterable(DbModel)
   class Model {
-    public a!: number;
-    public b!: number;
+    @filterable public a!: number;
+    @filterable public b!: number;
   }
 
   function operands(field) {
