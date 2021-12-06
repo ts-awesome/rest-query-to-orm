@@ -1,10 +1,11 @@
-const {compileWhereFor} = require('../dist/compiler');
-const {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP, IN_OP, LIKE_OP, CONTAINS_OP
-} = require('@ts-awesome/simple-query');
+import {compileWhereFor} from '../src/compiler';
+import {AND_OP, OR_OP, NOT_OP, REF_OP, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, IN_OP, LIKE_OP, CONTAINS_OP } from '@ts-awesome/simple-query';
 
 describe('query compiler', () => {
 
   class Model {
+    public a!: number;
+    public b!: number;
   }
 
   function operands(field) {
@@ -74,7 +75,7 @@ describe('query compiler', () => {
       [AND_OP]: {
         'a': 1,
         'b': 2,
-      }
+      } as never
     };
 
     const fn = compileWhereFor(Model, input);
@@ -95,7 +96,7 @@ describe('query compiler', () => {
       [OR_OP]: {
         'a': 1,
         'b': 2,
-      }
+      } as never
     };
 
     const fn = compileWhereFor(Model, input);
@@ -260,7 +261,7 @@ describe('query compiler', () => {
     const input = {
       [CONTAINS_OP]: {
         'a': 1,
-      }
+      } as never
     };
 
     const fn = compileWhereFor(Model, input);

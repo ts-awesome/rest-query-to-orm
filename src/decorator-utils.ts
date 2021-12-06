@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import 'reflect-metadata';
 
 export function D(decorators: any, target: any, key?: any, desc?: any): any {

@@ -9,7 +9,8 @@ import {
   asc,
   desc,
   not,
-  IOperandable
+  IOperandable,
+  Select,
 } from '@ts-awesome/orm';
 
 import {
@@ -33,6 +34,10 @@ import {
   ASC,
   DESC,
 } from '@ts-awesome/rest-query';
+import {FilterMetadataSymbol, IFilterInfo} from "./decorators";
+import {Operandable} from "@ts-awesome/orm/dist/wrappers";
+
+export const TableMetadataSymbol = Symbol.for('TableMetadata');
 
 export { ISimpleQuery, IOrderBy, AND_OP, OR_OP, ASC, DESC, EQ_OP, NEQ_OP, GT_OP, GTE_OP, LT_OP, LTE_OP, REGEX_OP};
 
@@ -135,7 +140,37 @@ export function compileWhereFor<T extends TableMetaProvider<InstanceType<T>>>(Mo
     return undefined;
   }
 
-  return (props) => compile((x) => props[x], query);
+  if (Model[TableMetadataSymbol] != null) {
+    return (props) => compile((field) => props[field], query);
+  }
+
+  const {model, fields}: IFilterInfo = Model[FilterMetadataSymbol]
+  const {primaryKey} = model[TableMetadataSymbol];
+
+  return (props) => compile((field) => {
+    return new Proxy({} as IOperandable<unknown>, {
+      get(target, op) {
+        return (value: unknown) => {
+          const fieldInfo = fields.get(field);
+          switch (fieldInfo?.kind) {
+            case 'plain':
+              return props[fieldInfo.name][op](value);
+            case 'relation':
+              return props[fieldInfo.field].in(
+                new Operandable('SUBQUERY', [(Select(fieldInfo.relation)
+                  .columns((b)=> [b[fieldInfo.relationKey]])
+                  .where((rel) => rel[fieldInfo.relationValue][op.toString()](value)) as never
+                )]));
+            case 'custom':
+              return fieldInfo.operators[op.toString()](props[primaryKey], op.toString(), value);
+            default:
+              throw new Error(`no filtering info found for ${JSON.stringify(field)}`);
+          }
+        }
+      }
+    })
+
+  }, query);
 }
 
 const order = {

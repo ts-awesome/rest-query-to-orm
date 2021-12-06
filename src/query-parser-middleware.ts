@@ -6,8 +6,9 @@ import { IMiddleware } from '@ts-awesome/rest';
 import { D } from './decorator-utils';
 import { injectable } from 'inversify'
 
-export function QueryParserMiddlewareFor<T extends TableMetaProvider<InstanceType<T>>>(Model: T): Function {
+export declare type Class<T> = new (...args: any) => T;
 
+export function QueryParserMiddlewareFor<T extends TableMetaProvider<InstanceType<T>>>(Model: T): Class<IMiddleware> {
   const Middleware = class implements IMiddleware  {
     public async handle({query: _}: any): Promise<void> {
       const {query, offset, limit, countOnly, orderBy} = parser(_);
