@@ -58,7 +58,7 @@ export const TableMetadataSymbol = Symbol.for('TableMetadata');
 
 export function filterable(Model: TableMetaProvider<any>): ClassDecorator;
 export function filterable(target: Object, propertyKey: string | symbol): void;
-export function filterable(): PropertyDecorator;
+export function filterable<T extends Record<string, any> = any>(name?: keyof T): PropertyDecorator;
 export function filterable<T extends Record<string, any>>(relation: RelationDef<T>, ...whitelist: string[]): PropertyDecorator;
 export function filterable<T>(operators: Record<string, Compiler<T>>): PropertyDecorator;
 export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorator | void {
@@ -83,10 +83,10 @@ export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorat
     const filterInfo = ensureFilterInfo(target.constructor);
     const {fields} = filterInfo;
 
-    if (fieldMeta == null) {
+    if (fieldMeta == null || typeof fieldMeta === 'string') {
       fields.set(key.toString(), {
         kind: 'plain',
-        name: key.toString(),
+        name: fieldMeta ?? key.toString(),
       })
     } else if (typeof fieldMeta.match === 'string') {
       const {match: field, table: relation, key: relationKey, value: relationValue} = fieldMeta;

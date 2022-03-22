@@ -37,7 +37,7 @@ class FilterModel {
   @filterable
   public name?: string;
 
-  @filterable
+  @filterable<DataModel>('value')
   public value?: string;
 
   @filterable<DataModel>({
