@@ -162,6 +162,10 @@ export function compileWhereFor<T extends TableMetaProvider<InstanceType<T>>>(Mo
                   .where((rel) => rel[fieldInfo.relationValue][op.toString()](value)) as never
                 )]));
             case 'custom':
+              if (typeof fieldInfo.operators[op.toString()] !== 'function') {
+                throw new Error(`Operator ${JSON.stringify(op)} is not supported for field ${field}, got ${typeof fieldInfo.operators[op.toString()]}`);
+              }
+
               return fieldInfo.operators[op.toString()](props[primaryKey], op.toString(), value);
             default:
               throw new Error(`no filtering info found for ${JSON.stringify(field)}`);
