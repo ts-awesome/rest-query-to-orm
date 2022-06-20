@@ -56,11 +56,13 @@ function ensureFilterInfo(proto: any): IFilterInfo {
 
 export const TableMetadataSymbol = Symbol.for('TableMetadata');
 
+type Operations = 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte' | 'in' | 'has' | 'like';
+
 export function filterable(Model: TableMetaProvider<any>): ClassDecorator;
 export function filterable(target: Object, propertyKey: string | symbol): void;
 export function filterable<T extends Record<string, any> = any>(name?: keyof T): PropertyDecorator;
 export function filterable<T extends Record<string, any>>(relation: RelationDef<T>, ...whitelist: string[]): PropertyDecorator;
-export function filterable<T>(operators: Record<string, Compiler<T>>): PropertyDecorator;
+export function filterable<T>(operators: Partial<Record<Operations, Compiler<T>>>): PropertyDecorator;
 export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorator | void {
   if (args.length === 1 && args[0][TableMetadataSymbol] != null) {
     return function validator <TFunction extends Function>(target: TFunction): TFunction | void {
