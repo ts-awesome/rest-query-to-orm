@@ -9,7 +9,7 @@ interface RelationDef<T extends Record<string, unknown>, X extends Record<string
   value: keyof X;
 }
 
-interface Compiler<T> {
+export interface Compiler<T> {
   (primary: IOperandable<unknown>, op: string, value: T): IOperandable<boolean>;
 }
 
