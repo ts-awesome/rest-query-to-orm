@@ -145,6 +145,9 @@ export function compileWhereFor<T extends TableMetaProvider<InstanceType<T>>>(Mo
   }
 
   const {model, fields}: IFilterInfo = Model[FilterMetadataSymbol]
+  if (model == null) {
+    throw new Error(`Model is required`);
+  }
   const {primaryKey} = model[TableMetadataSymbol];
 
   return (props) => compile((field) => {

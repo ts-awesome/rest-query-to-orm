@@ -27,6 +27,6 @@ export function setMeta(key: any, value: any): any {
   throw new Error('Not supported Error');
 }
 
-export function decorateParam(paramIndex: number, decorator: any): Function {
+export function decorateParam(paramIndex: number, decorator: any): ParameterDecorator {
   return (target: any, key: any) => { decorator(target, key, paramIndex); }
 }

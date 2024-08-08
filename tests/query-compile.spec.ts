@@ -12,7 +12,7 @@ describe('query compiler', () => {
   }
 
   @filterable(DbModel)
-  class Model {
+  class Model implements DbModel{
     @filterable public a!: number;
     @filterable public b!: number;
   }
@@ -55,7 +55,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a'));
+    const result = fn?.(operandable('a'));
 
     expect(result).toStrictEqual("`a`=1");
   })
@@ -68,7 +68,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual({
       _operands: [
@@ -89,7 +89,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual({
       _operands: [
@@ -110,7 +110,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual({
       _operands: [
@@ -130,7 +130,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual({
       _operands: [
@@ -149,7 +149,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`=1");
   });
@@ -163,7 +163,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`!=1");
   });
@@ -177,7 +177,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`>1");
   });
@@ -191,7 +191,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`>=1");
   });
@@ -205,7 +205,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`<1");
   });
@@ -219,7 +219,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`<=1");
   });
@@ -233,7 +233,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`<=`b`");
   });
@@ -247,7 +247,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`~\"a%\"");
   });
@@ -261,7 +261,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`IN[1,2]");
   });
@@ -275,7 +275,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( "`a`HAS1");
   });
@@ -302,7 +302,7 @@ describe('query compiler', () => {
 
     const fn = compileWhereFor(Model, input);
 
-    const result = fn(operandable('a', 'b'));
+    const result = fn?.(operandable('a', 'b'));
 
     expect(result).toStrictEqual( {
       "_operands": [
