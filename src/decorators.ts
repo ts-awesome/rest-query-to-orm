@@ -65,7 +65,7 @@ export function filterable<T extends Record<string, any>>(relation: RelationDef<
 export function filterable<T>(operators: Partial<Record<Operations, Compiler<T>>>): PropertyDecorator;
 export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorator | void {
   if (args.length === 1 && (args[0] as object)[TableMetadataSymbol] != null) {
-    return function validator (target: object): object | void {
+    return function classDecorator (target: object): object | void {
       const filterInfo = ensureFilterInfo(target);
       filterInfo.model = args[0] as never;
     }
@@ -74,14 +74,14 @@ export function filterable(...args: unknown[]): ClassDecorator | PropertyDecorat
   let fieldMeta;
   let operators;
   if (args.length > 1 && typeof args[0]?.constructor === 'function' && typeof args[1] === 'string') {
-    return validator(...(args as [object, string]));
+    return decorator(...(args as [object, string]));
   }
 
   // eslint-disable-next-line prefer-const
   [fieldMeta, ...operators] = args;
-  return validator;
+  return decorator;
 
-  function validator(target: object, key: string | symbol): void {
+  function decorator(target: object, key: string | symbol): void {
     const filterInfo = ensureFilterInfo(target.constructor);
     const {fields} = filterInfo;
 

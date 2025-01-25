@@ -47,20 +47,42 @@ const compiled = Select(Model)
 import {Route, httpGet, queryParam} from "@ts-awesome/rest";
 import {WhereBuilder, OrderBuilder} from "@ts-awesome/orm";
 import {QueryParserMiddlewareFor} from "@ts-awesome/rest-query-to-orm";
+import {GetListQueryInput} from "./query-parser-middleware";
 
 @httpGet('/test', QueryParserMiddlewareFor(Model))
 export class TestRoute extends Route {
-  async handle(
-    @queryParam('query', true) query: WhereBuilder<Model> | null,
-    @queryParam('orderBy', true) orderBy: OrderBuilder<Model> | null,
-    @queryParam('offset', Number, true) offset: number | null,
-    @queryParam('limit', Number, true) limit: number | null,
-    @queryParam('countOnly', Boolean) countOnly: boolean,
-  ) {
-    // something important happens here
+  @inject(GetListQuerySymbol)
+  protected model!: GetListQueryInput<Model>
+
+  @inject(SomeEntityServiceSymbol)
+  protected entityService!: ISomeEntityService;
+
+  async handle() {
+    const baseQuery = this.entityService
+      .select()
+      // ensure visibility rules
+      .where(x => x.ownerId.eq(this.autheUser.id));
+
+    if (this.model.query) {
+      baseQuery.where(this.model.query);
+    }
+
+    if (this.model.countOnly) {
+      // return count
+      return this.jsonAsync(baseQuery.count());
+    }
+
+    // include default order to ensure stable default ordering
+    baseQuery.orderBy(model.orderBy ?? (['id'] as never))
+    baseQuery.offset(model.offset ?? 0);
+    baseQuery.limit(model.limit ?? 100);
+
+    const results: readonly Model[] = await baseQuery.fetch();
   }
 }
 ```
+
+Use `DescribeQueryParams` a helper function to provide useful description via OpenApi schemas
 
 ## Filterable model
 

@@ -18,8 +18,9 @@
   },
   "devDependencies": {
     "@ts-awesome/orm": "^1.6.0",
+    "@ts-awesome/model-reader": "^1.0.3",
     "@ts-awesome/rest": "^3.0.0-beta.1",
-    "@ts-awesome/rest-query": "^1.0.8",
+    "@ts-awesome/rest-query": "^2.0.2",
     "@ts-awesome/simple-query": "^1.2.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^8.0.1",
@@ -32,8 +33,9 @@
   },
   "peerDependencies": {
     "@ts-awesome/orm": "^1.2.2",
+    "@ts-awesome/model-reader": "^1.0.3",
     "@ts-awesome/rest": "^2.0.0 || ^3.0.0-beta.0 || ^3.0.0",
-    "@ts-awesome/rest-query": "^1.0.2",
+    "@ts-awesome/rest-query": "^2.0.2",
     "@ts-awesome/simple-query": "^1.1.0",
     "inversify": "^5.0.0 || ^6.0.0"
   },

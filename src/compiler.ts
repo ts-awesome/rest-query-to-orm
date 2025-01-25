@@ -185,7 +185,7 @@ const order = {
   [DESC]: desc,
 };
 
-export function compileOrderFor<T extends TableMetaProvider<InstanceType<T>>>(Model: T, query?: IOrderBy[]): OrderBuilder<InstanceType<T>> | undefined {
+export function compileOrderFor<T extends TableMetaProvider<InstanceType<T>>>(Model: T, query?: readonly IOrderBy[]): OrderBuilder<InstanceType<T>> | undefined {
 
   if (!query || query.length < 1) {
     return undefined;
